@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff;
+    color: #000;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+}
+
+.mensagem-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mensagem {
+    font-size: 24px;
+    white-space: pre-wrap;
+    overflow: hidden;
+    border-right: 2px solid black;
+    max-width: 80%;
+}
+
+.cronometro {
+    margin-top: 20px;
+    font-size: 20px;
+    display: none;
+}
+
+.toggle-btn {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+.toggle-btn::before {
+    content: "⏳";
+}
+
+.toggle-btn span {
+    margin-left: 5px;
+}
+
+.play-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-btn {
+    font-size: 40px;
+    border: none;
+    background-color: transparent;
+    color: black;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-btn::before {
+    content: "▶";
+}

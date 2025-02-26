@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagem para Roberta</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+        }
+        .mensagem-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .mensagem {
+            font-size: 24px;
+            white-space: pre-wrap;
+            overflow: hidden;
+            border-right: 2px solid black;
+            max-width: 80%;
+        }
+        .cronometro {
+            margin-top: 20px;
+            font-size: 20px;
+            display: none;
+        }
+        .toggle-btn {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: black;
+            color: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+        .toggle-btn::before {
+            content: "⏳";
+        }
+        .toggle-btn span {
+            margin-left: 5px;
+        }
+        .play-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .play-btn {
+            font-size: 40px;
+            border: none;
+            background-color: transparent;
+            color: black;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .play-btn::before {
+            content: "▶";
+        }
+    </style>
+    <script>
+        function iniciarMensagem() {
+            document.querySelector('.play-container').style.display = 'none';
+            document.querySelector('.mensagem-container').style.display = 'flex';
+            digitarMensagem();
+        }
+        
+        function digitarMensagem() {
+            const texto = "Feliz Aniversário, Mana Roberta! Tudo seu e nada deles!🎉Você com certeza é a piscina mais braba que conheço (o presente representa bem esse ponto de vista), mas também é uma das pessoas mais incríveis que já tive o prazer de conhecer. Espero que seu dia seja cheio de alegria, risadas que te deixam vermelha como de costume e muitos momentos especiais. Espero que sua externa também curta o presente, gosto muito de você!               Feliz Aniversário!!!! 💖🥳  ";
+            const elemento = document.querySelector('.mensagem');
+            const palavras = texto.split(" ");
+            let i = 0;
+            
+            function adicionarPalavra() {
+                if (i < palavras.length) {
+                    elemento.innerHTML += palavras[i] + " ";
+                    i++;
+                    setTimeout(adicionarPalavra, 200); // Tempo ajustado para tornar mais preciso
+                }
+            }
+            adicionarPalavra();
+        }
+        
+        function atualizarCronometro() {
+            const dataFutura = new Date('2025-03-01T00:00:00').getTime();
+            const agora = new Date().getTime();
+            const diferenca = dataFutura - agora;
+            
+            if (diferenca <= 0) {
+                document.getElementById('cronometro').innerHTML = "O tempo acabou!";
+                return;
+            }
+            
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+            
+            document.getElementById('cronometro').innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+        }
+        
+        setInterval(atualizarCronometro, 1000);
+        
+        function toggleCronometro() {
+            const cronometro = document.getElementById('cronometro');
+            cronometro.style.display = cronometro.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="play-container">
+        <button class="play-btn" onclick="iniciarMensagem()"></button>
+    </div>
+    <div class="mensagem-container">
+        <div class="mensagem"></div>
+        <button class="toggle-btn" onclick="toggleCronometro()"><span> VÁLIDO A PARTIR DE:  </span></button>
+        <div id="cronometro" class="cronometro"></div>
+    </div>
+</body>
+</html>
